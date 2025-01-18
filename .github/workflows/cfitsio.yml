@@ -1,0 +1,66 @@
+name: CFitsIO
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build-on-linux-x64:
+    name: Build on Linux x64
+    runs-on: ubuntu-24.04
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Download
+        run: wget https://github.com/HEASARC/cfitsio/archive/refs/heads/develop.zip -O cfitsio.zip
+
+      - name: Unzip
+        run: unzip cfitsio.zip
+
+      - name: Configure
+        working-directory: cfitsio-develop
+        run: ./configure
+
+      - name: Make
+        working-directory: cfitsio-develop
+        run: make
+
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: cfitsio-linux-x64
+          path: |
+            cfitsio-develop/.libs/libcfitsio.so
+          retention-days: 7
+
+jobs:
+  build-on-linux-arm64:
+    name: Build on Linux arm64
+    runs-on: ubuntu-24.04-arm
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Download
+        run: wget https://github.com/HEASARC/cfitsio/archive/refs/heads/develop.zip -O cfitsio.zip
+
+      - name: Unzip
+        run: unzip cfitsio.zip
+
+      - name: Configure
+        working-directory: cfitsio-develop
+        run: ./configure
+
+      - name: Make
+        working-directory: cfitsio-develop
+        run: make
+
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: cfitsio-linux-arm64
+          path: |
+            cfitsio-develop/.libs/libcfitsio.so
+          retention-days: 7
