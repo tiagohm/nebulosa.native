@@ -27,7 +27,7 @@ jobs:
         run: make
 
       - name: Upload Artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: cfitsio-linux-x64
           path: |
@@ -57,7 +57,7 @@ jobs:
         run: make
 
       - name: Upload Artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: cfitsio-linux-arm64
           path: |
