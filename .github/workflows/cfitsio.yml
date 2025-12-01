@@ -10,7 +10,7 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
 
       - name: Download
         run: wget https://github.com/HEASARC/cfitsio/archive/refs/heads/develop.zip -O cfitsio.zip
@@ -40,7 +40,7 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
 
       - name: Download
         run: wget https://github.com/HEASARC/cfitsio/archive/refs/heads/develop.zip -O cfitsio.zip
