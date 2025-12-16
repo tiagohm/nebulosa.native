@@ -8,4 +8,4 @@ Native libraries for Nebulosa
 ## Libraries
 
 * [cfitsio](https://heasarc.gsfc.nasa.gov/fitsio/)
-* [wcslib](https://www.atnf.csiro.au/computing/software/wcs/WCS/wcslib/)
+* [wcslib](https://www.atnf.csiro.au/computing/software/wcs/)

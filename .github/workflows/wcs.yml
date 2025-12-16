@@ -13,17 +13,17 @@ jobs:
         uses: actions/checkout@v6
 
       - name: Download
-        run: wget https://www.atnf.csiro.au/computing/software/wcs/WCS/wcslib-8.4.tar.bz2 -O wcslib.tar.bz2
+        run: wget https://www.atnf.csiro.au/computing/software/wcs/wcslib-releases/wcslib-8.5.tar.bz2 -O wcslib.tar.bz2
 
       - name: Unzip
         run: bzcat wcslib.tar.bz2 | tar pvxf -
 
       - name: Configure
-        working-directory: wcslib-8.4
+        working-directory: wcslib-8.5
         run: ./configure
 
       - name: Make
-        working-directory: wcslib-8.4
+        working-directory: wcslib-8.5
         run: make build
 
       - name: Upload Artifact
@@ -31,7 +31,7 @@ jobs:
         with:
           name: libwcs-linux-x64
           path: |
-            wcslib-8.4/C/libwcs.so.8.4
+            wcslib-8.5/C/libwcs.so.8.5
           retention-days: 7
 
   build-on-windows-x64:
@@ -56,17 +56,17 @@ jobs:
         uses: actions/checkout@v6
 
       - name: Download
-        run: wget https://www.atnf.csiro.au/computing/software/wcs/WCS/wcslib-8.4.tar.bz2 -O wcslib.tar.bz2
+        run: wget https://www.atnf.csiro.au/computing/software/wcs/wcslib-releases/wcslib-8.5.tar.bz2 -O wcslib.tar.bz2
 
       - name: Unzip
         run: bzcat wcslib.tar.bz2 | tar pvxf -
 
       - name: Configure
-        working-directory: wcslib-8.4
+        working-directory: wcslib-8.5
         run: ./configure
 
       - name: Make
-        working-directory: wcslib-8.4
+        working-directory: wcslib-8.5
         run: make build CFLAGS=-DNO_OLDNAMES
 
       - name: Upload Artifact
@@ -74,7 +74,7 @@ jobs:
         with:
           name: libwcs-win32-x64
           path: |
-            wcslib-8.4/C/libwcs.dll.8.4
+            wcslib-8.5/C/libwcs.dll.8.5
           retention-days: 7
 
   build-on-linux-arm64:
@@ -86,17 +86,17 @@ jobs:
         uses: actions/checkout@v6
 
       - name: Download
-        run: wget https://www.atnf.csiro.au/computing/software/wcs/WCS/wcslib-8.4.tar.bz2 -O wcslib.tar.bz2
+        run: wget https://www.atnf.csiro.au/computing/software/wcs/wcslib-releases/wcslib-8.5.tar.bz2 -O wcslib.tar.bz2
 
       - name: Unzip
         run: bzcat wcslib.tar.bz2 | tar pvxf -
 
       - name: Configure
-        working-directory: wcslib-8.4
+        working-directory: wcslib-8.5
         run: ./configure
 
       - name: Make
-        working-directory: wcslib-8.4
+        working-directory: wcslib-8.5
         run: make build
 
       - name: Upload Artifact
@@ -104,5 +104,5 @@ jobs:
         with:
           name: libwcs-linux-arm64
           path: |
-            wcslib-8.4/C/libwcs.so.8.4
+            wcslib-8.5/C/libwcs.so.8.5
           retention-days: 7
