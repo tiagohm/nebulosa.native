@@ -20,7 +20,7 @@ jobs:
 
       - name: Configure
         working-directory: wcslib-8.5
-        run: ./configure
+        run: ./configure --disable-fortran --disable-flex --disable-utils --without-cfitsio --without-pgplot
 
       - name: Make
         working-directory: wcslib-8.5
@@ -32,28 +32,18 @@ jobs:
           name: libwcs-linux-x64
           path: |
             wcslib-8.5/C/libwcs.so.8.5
-          retention-days: 7
+          retention-days: 1
 
   build-on-windows-x64:
     name: Build on Windows x64
-    runs-on: windows-2025
-
-    defaults:
-      run:
-        shell: msys2 {0}
+    runs-on: ubuntu-24.04
 
     steps:
-      - name: Set up MSYS2
-        uses: msys2/setup-msys2@v2
-        with:
-          msystem: mingw64
-          install: mingw-w64-x86_64-openssl
-
-      - name: Install GCC
-        run: pacman --noconfirm -S mingw-w64-x86_64-gcc diffutils make
-
       - name: Checkout
         uses: actions/checkout@v6
+
+      - name: Install MinGW-w64
+        run: sudo apt update && sudo apt install -y gcc-mingw-w64-x86-64-posix
 
       - name: Download
         run: wget https://www.atnf.csiro.au/computing/software/wcs/wcslib-releases/wcslib-8.5.tar.bz2 -O wcslib.tar.bz2
@@ -63,11 +53,11 @@ jobs:
 
       - name: Configure
         working-directory: wcslib-8.5
-        run: ./configure
+        run: CC=x86_64-w64-mingw32-gcc LDFLAGS=-static ./configure --host=x86_64-w64-mingw32 --disable-fortran --disable-utils --without-cfitsio --without-flex --without-pgplot CFLAGS=-DNO_OLDNAMES
 
       - name: Make
         working-directory: wcslib-8.5
-        run: make build CFLAGS=-DNO_OLDNAMES
+        run: make build
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v5
@@ -75,7 +65,7 @@ jobs:
           name: libwcs-win32-x64
           path: |
             wcslib-8.5/C/libwcs.dll.8.5
-          retention-days: 7
+          retention-days: 1
 
   build-on-linux-arm64:
     name: Build on Linux ARM64
@@ -93,7 +83,7 @@ jobs:
 
       - name: Configure
         working-directory: wcslib-8.5
-        run: ./configure
+        run: ./configure --disable-fortran --disable-flex --disable-utils --without-cfitsio --without-pgplot
 
       - name: Make
         working-directory: wcslib-8.5
@@ -105,4 +95,4 @@ jobs:
           name: libwcs-linux-arm64
           path: |
             wcslib-8.5/C/libwcs.so.8.5
-          retention-days: 7
+          retention-days: 1
