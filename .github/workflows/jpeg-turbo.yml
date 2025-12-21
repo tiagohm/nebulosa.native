@@ -1,0 +1,121 @@
+name: JPEG-Turbo
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build-on-linux-x64:
+    name: Build on Linux x64
+    runs-on: ubuntu-22.04
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Download
+        run: git clone --depth=1 https://github.com/libjpeg-turbo/libjpeg-turbo.git
+
+      - name: Install NASM
+        run: sudo apt update && sudo apt install -y nasm
+
+      - name: Create Build Directory
+        working-directory: libjpeg-turbo
+        run: mkdir build
+
+      - name: Configure
+        working-directory: libjpeg-turbo/build
+        run: cmake -G"Unix Makefiles" -DENABLE_STATIC=0 -DWITH_TESTS=0 -DWITH_TOOLS=0 -DWITH_ARITH_ENC=0 -DWITH_ARITH_DEC=0 ../
+
+      - name: Make
+        working-directory: libjpeg-turbo/build
+        run: make
+
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v5
+        with:
+          name: libturbojpeg-linux-x64
+          path: |
+            libjpeg-turbo/build/libturbojpeg.so
+          retention-days: 1
+
+  build-on-windows-x64:
+    name: Build on Windows x64
+    runs-on: windows-2025
+
+    defaults:
+      run:
+        shell: msys2 {0}
+
+    steps:
+      - name: Set up MSYS2
+        uses: msys2/setup-msys2@v2
+        with:
+          msystem: mingw64
+          install: mingw-w64-x86_64-openssl
+
+      - name: Install GCC and NASM
+        run: pacman --noconfirm -S mingw-w64-x86_64-gcc mingw-w64-x86_64-cmake make nasm git
+
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Download
+        run: git clone --depth=1 https://github.com/libjpeg-turbo/libjpeg-turbo.git
+
+      - name: Create Build Directory
+        working-directory: libjpeg-turbo
+        run: mkdir build
+
+      - name: Create toolchain.cmake
+        working-directory: libjpeg-turbo/build
+        run: echo -e "set(CMAKE_SYSTEM_NAME Windows)\nset(CMAKE_SYSTEM_PROCESSOR AMD64)\nset(CMAKE_SHARED_LINKER_FLAGS \"\${CMAKE_SHARED_LINKER_FLAGS} -static-libgcc -static-libstdc++ -Wl,-Bstatic -Wl,--whole-archive,--allow-multiple-definition -lwinpthread -Wl,--no-whole-archive -Wl,-Bdynamic\")" > toolchain.cmake
+
+      - name: Configure
+        working-directory: libjpeg-turbo/build
+        run: cmake -G"MSYS Makefiles" -DENABLE_STATIC=0 -DWITH_TESTS=0 -DWITH_TOOLS=0 -DWITH_ARITH_ENC=0 -DWITH_ARITH_DEC=0 -DCMAKE_TOOLCHAIN_FILE=toolchain.cmake ../
+
+      - name: Make
+        working-directory: libjpeg-turbo/build
+        run: make
+
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v5
+        with:
+          name: libturbojpeg-win32-x64
+          path: |
+            libjpeg-turbo/build/libturbojpeg.dll
+          retention-days: 1
+
+  build-on-linux-arm64:
+    name: Build on Linux ARM64
+    runs-on: ubuntu-22.04-arm
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Download
+        run: git clone --depth=1 https://github.com/libjpeg-turbo/libjpeg-turbo.git
+
+      - name: Install NASM
+        run: sudo apt update && sudo apt install -y nasm
+
+      - name: Create Build Directory
+        working-directory: libjpeg-turbo
+        run: mkdir build
+
+      - name: Configure
+        working-directory: libjpeg-turbo/build
+        run: cmake -G"Unix Makefiles" -DENABLE_STATIC=0 -DWITH_TESTS=0 -DWITH_TOOLS=0 -DWITH_ARITH_ENC=0 -DWITH_ARITH_DEC=0 ../
+
+      - name: Make
+        working-directory: libjpeg-turbo/build
+        run: make
+
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v5
+        with:
+          name: libturbojpeg-linux-arm64
+          path: |
+            libjpeg-turbo/build/libturbojpeg.so
+          retention-days: 1

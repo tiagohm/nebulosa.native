@@ -9,3 +9,4 @@ Native libraries for Nebulosa
 
 * [cfitsio](https://heasarc.gsfc.nasa.gov/fitsio/)
 * [wcslib](https://www.atnf.csiro.au/computing/software/wcs/)
+* [libjpeg-turbo](https://libjpeg-turbo.org/)
