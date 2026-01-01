@@ -27,7 +27,7 @@ jobs:
         run: make build
 
       - name: Upload Artifact
-        uses: actions/upload-artifact@v5
+        uses: actions/upload-artifact@v6
         with:
           name: libwcs-linux-x64
           path: |
@@ -60,7 +60,7 @@ jobs:
         run: make build
 
       - name: Upload Artifact
-        uses: actions/upload-artifact@v5
+        uses: actions/upload-artifact@v6
         with:
           name: libwcs-win32-x64
           path: |
@@ -90,7 +90,7 @@ jobs:
         run: make build
 
       - name: Upload Artifact
-        uses: actions/upload-artifact@v5
+        uses: actions/upload-artifact@v6
         with:
           name: libwcs-linux-arm64
           path: |
