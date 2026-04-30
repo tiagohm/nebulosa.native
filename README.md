@@ -4,6 +4,7 @@ Native libraries for Nebulosa
 
 [![CFitsIO](https://github.com/tiagohm/nebulosa.native/actions/workflows/cfitsio.yml/badge.svg)](https://github.com/tiagohm/nebulosa.native/actions/workflows/cfitsio.yml)
 [![WCS](https://github.com/tiagohm/nebulosa.native/actions/workflows/wcs.yml/badge.svg)](https://github.com/tiagohm/nebulosa.native/actions/workflows/wcs.yml)
+[![JPEG-Turbo](https://github.com/tiagohm/nebulosa.native/actions/workflows/jpeg-turbo.yml/badge.svg)](https://github.com/tiagohm/nebulosa.native/actions/workflows/jpeg-turbo.yml)
 
 ## Libraries
 
