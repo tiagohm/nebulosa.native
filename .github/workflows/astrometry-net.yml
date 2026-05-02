@@ -1,0 +1,57 @@
+name: Astrometry.net
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build-on-linux-x64:
+    name: Build on Linux x64
+    runs-on: ubuntu-22.04
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Download
+        run: git clone --depth 1 --single-branch https://github.com/dstndstn/astrometry.net.git
+
+      - name: Install Dependencies
+        run: sudo apt update && sudo apt install -y libcairo2-dev libnetpbm10-dev netpbm libpng-dev libjpeg-dev zlib1g-dev libbz2-dev libcfitsio-dev
+
+      - name: Make
+        working-directory: astrometry.net
+        run: make
+
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v7
+        with:
+          name: astrometrynet-linux-x64
+          path: |
+            astrometry.net/solver/libastrometry.so
+          retention-days: 7
+
+  build-on-linux-arm64:
+    name: Build on Linux arm64
+    runs-on: ubuntu-22.04-arm
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Download
+        run: git clone --depth 1 --single-branch https://github.com/dstndstn/astrometry.net.git
+
+      - name: Install Dependencies
+        run: sudo apt update && sudo apt install -y libcairo2-dev libnetpbm10-dev netpbm libpng-dev libjpeg-dev zlib1g-dev libbz2-dev libcfitsio-dev
+
+      - name: Make
+        working-directory: astrometry.net
+        run: make
+
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v7
+        with:
+          name: astrometrynet-linux-arm64
+          path: |
+            astrometry.net/solver/libastrometry.so
+          retention-days: 7
