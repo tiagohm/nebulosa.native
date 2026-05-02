@@ -16,7 +16,7 @@ jobs:
         run: git clone --depth 1 --single-branch https://github.com/dstndstn/astrometry.net.git
 
       - name: Install Dependencies
-        run: sudo apt update && sudo apt install -y libcairo2-dev libnetpbm10-dev netpbm libpng-dev libjpeg-dev zlib1g-dev libbz2-dev libcfitsio-dev
+        run: sudo apt update && sudo apt install -y libgsl-dev libcairo2-dev libnetpbm10-dev netpbm libpng-dev libjpeg-dev zlib1g-dev libbz2-dev libcfitsio-dev
 
       - name: Make
         working-directory: astrometry.net
@@ -42,7 +42,7 @@ jobs:
         run: git clone --depth 1 --single-branch https://github.com/dstndstn/astrometry.net.git
 
       - name: Install Dependencies
-        run: sudo apt update && sudo apt install -y libcairo2-dev libnetpbm10-dev netpbm libpng-dev libjpeg-dev zlib1g-dev libbz2-dev libcfitsio-dev
+        run: sudo apt update && sudo apt install -y libgsl-dev libcairo2-dev libnetpbm10-dev netpbm libpng-dev libjpeg-dev zlib1g-dev libbz2-dev libcfitsio-dev
 
       - name: Make
         working-directory: astrometry.net
