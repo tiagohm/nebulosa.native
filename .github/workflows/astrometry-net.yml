@@ -55,3 +55,61 @@ jobs:
           path: |
             astrometry.net/solver/libastrometry.so
           retention-days: 7
+
+  build-on-windows-x64:
+    name: Build on Windows x64
+    runs-on: windows-2025
+    continue-on-error: true
+
+    defaults:
+      run:
+        shell: msys2 {0}
+
+    steps:
+      - name: Set up MSYS2
+        uses: msys2/setup-msys2@v2
+        with:
+          msystem: mingw64
+          update: true
+          install: >-
+            git
+            make
+            mingw-w64-x86_64-cfitsio
+            mingw-w64-x86_64-gcc
+            mingw-w64-x86_64-pkgconf
+
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Download
+        run: git clone --depth 1 --single-branch https://github.com/tiagohm/astrometry.net.git
+
+      - name: Make
+        working-directory: astrometry.net
+        run: |
+          set -euo pipefail
+
+          common_make_args=(
+            SYSTEM_GSL=no
+            SHAREDLIB_SUFFIX=dll
+            'SHAREDLIBFLAGS_DEF=-shared -Wl,--out-implib,libastrometry.dll.a -Wl,--no-undefined'
+            PYTHON_SO_EXT=.pyd
+            "LDLIBS_DEF=$(pkg-config --libs cfitsio)"
+          )
+
+          make -C gsl-an "${common_make_args[@]}"
+          make -C qfits-an "${common_make_args[@]}"
+          make -C util config libanbase.a libanutils.a libanfiles.a "${common_make_args[@]}"
+          make -C libkd libkd.a "${common_make_args[@]}"
+          make -C catalogs libcatalogs.a "${common_make_args[@]}"
+          make -C solver libastrometry.dll "${common_make_args[@]}"
+
+          test -f solver/libastrometry.dll
+
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v7
+        with:
+          name: astrometrynet-win32-x64
+          path: |
+            astrometry.net/solver/libastrometry.dll
+          retention-days: 7
