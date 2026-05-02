@@ -13,7 +13,7 @@ jobs:
         uses: actions/checkout@v6
 
       - name: Download
-        run: git clone --depth 1 --single-branch https://github.com/dstndstn/astrometry.net.git
+        run: git clone --depth 1 --single-branch https://github.com/tiagohm/astrometry.net.git
 
       - name: Install Dependencies
         run: sudo apt update && sudo apt install -y libcairo2-dev libnetpbm10-dev netpbm libpng-dev libjpeg-dev zlib1g-dev libbz2-dev libcfitsio-dev
@@ -39,7 +39,7 @@ jobs:
         uses: actions/checkout@v6
 
       - name: Download
-        run: git clone --depth 1 --single-branch https://github.com/dstndstn/astrometry.net.git
+        run: git clone --depth 1 --single-branch https://github.com/tiagohm/astrometry.net.git
 
       - name: Install Dependencies
         run: sudo apt update && sudo apt install -y libcairo2-dev libnetpbm10-dev netpbm libpng-dev libjpeg-dev zlib1g-dev libbz2-dev libcfitsio-dev
