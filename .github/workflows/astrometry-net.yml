@@ -5,6 +5,7 @@ on:
 
 jobs:
   build-on-linux-x64:
+    if: ${{ false }} 
     name: Build on Linux x64
     runs-on: ubuntu-22.04
 
@@ -31,6 +32,7 @@ jobs:
           retention-days: 7
 
   build-on-linux-arm64:
+    if: ${{ false }} 
     name: Build on Linux arm64
     runs-on: ubuntu-22.04-arm
 
