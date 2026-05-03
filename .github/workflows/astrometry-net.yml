@@ -79,7 +79,7 @@ jobs:
             mingw-w64-x86_64-cfitsio
             mingw-w64-x86_64-gcc
             mingw-w64-x86_64-pkgconf
-            mingw-w64-x86_64-regex
+            mingw-w64-x86_64-efl-regex
 
       - name: Checkout
         uses: actions/checkout@v6
