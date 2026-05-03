@@ -99,7 +99,7 @@ jobs:
             "LDLIBS_DEF=$(pkg-config --libs cfitsio)"
           )
 
-          make -C solver libastrometry.dll "${common_make_args[@]}"
+          make solver libastrometry.dll "${common_make_args[@]}"
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v7
