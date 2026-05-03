@@ -80,6 +80,7 @@ jobs:
             mingw-w64-x86_64-gcc
             mingw-w64-x86_64-pkgconf
             mingw-w64-x86_64-libgnurx
+            mingw-w64-x86_64-libjpeg-turbo
 
       - name: Checkout
         uses: actions/checkout@v6
