@@ -10,7 +10,7 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
 
       - name: Download
         run: git clone --depth 1 --single-branch https://github.com/tiagohm/astrometry.net.git
@@ -36,7 +36,7 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
 
       - name: Download
         run: git clone --depth 1 --single-branch https://github.com/tiagohm/astrometry.net.git
@@ -81,7 +81,7 @@ jobs:
             mingw-w64-x86_64-libjpeg-turbo
 
       - name: Checkout
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
 
       - name: Download
         run: git clone --depth 1 --single-branch https://github.com/tiagohm/astrometry.net.git
