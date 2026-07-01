@@ -10,7 +10,7 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
 
       - name: Download
         run: wget https://www.atnf.csiro.au/computing/software/wcs/wcslib-releases/wcslib-8.6.tar.bz2 -O wcslib.tar.bz2
@@ -40,7 +40,7 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
 
       - name: Install MinGW-w64
         run: sudo apt update && sudo apt install -y gcc-mingw-w64-x86-64-posix
@@ -73,7 +73,7 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
 
       - name: Download
         run: wget https://www.atnf.csiro.au/computing/software/wcs/wcslib-releases/wcslib-8.6.tar.bz2 -O wcslib.tar.bz2
