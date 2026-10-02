@@ -25,7 +25,7 @@ jobs:
       - name: Upload Artifact
         uses: actions/upload-artifact@v7
         with:
-          name: astrometrynet-linux-x64
+          name: libastrometry-linux-x64
           path: |
             astrometry.net/solver/libastrometry.so
           retention-days: 1
@@ -52,7 +52,7 @@ jobs:
       - name: Upload Artifact
         uses: actions/upload-artifact@v7
         with:
-          name: astrometrynet-linux-arm64
+          name: libastrometry-linux-arm64
           path: |
             astrometry.net/solver/libastrometry.so
           retention-days: 1
@@ -113,7 +113,7 @@ jobs:
       - name: Upload Artifact
         uses: actions/upload-artifact@v7
         with:
-          name: astrometrynet-win32-x64
+          name: libastrometry-win32-x64
           path: |
             astrometry.net/solver/libastrometry.dll
           retention-days: 1
