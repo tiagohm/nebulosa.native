@@ -53,7 +53,16 @@ jobs:
 
       - name: Configure
         working-directory: wcslib-8.10
-        run: CC=x86_64-w64-mingw32-gcc LDFLAGS=-static ./configure --host=x86_64-w64-mingw32 --disable-fortran --disable-flex --disable-utils --without-cfitsio --without-pgplot CFLAGS="-DNO_OLDNAMES -std=c11"
+        run: |
+          CC=x86_64-w64-mingw32-gcc LDFLAGS=-static ./configure --host=x86_64-w64-mingw32 --disable-fortran --disable-flex --disable-utils --without-cfitsio --without-pgplot CFLAGS="-DNO_OLDNAMES -std=c11"
+          # MinGW accepts __declspec(thread), so configure selects it for WCSLIB_TLS.
+          # The flag is written unquoted into makedefs, and Ubuntu's /bin/sh then
+          # rejects the parentheses: Syntax error: "(" unexpected.
+          sed -i "s/-DWCSLIB_TLS=__declspec(thread)/-DWCSLIB_TLS='__declspec(thread)'/g" makedefs config.status
+          if grep -F 'WCSLIB_TLS=__declspec(thread)' makedefs; then
+            echo 'makedefs still passes an unquoted __declspec(thread) to the shell' >&2
+            exit 1
+          fi
 
       - name: Make
         working-directory: wcslib-8.10
