@@ -33,6 +33,7 @@ jobs:
           path: |
             wcslib-8.10/C/libwcs.so.8.10
           retention-days: 1
+          compression-level: 9
 
   build-on-windows-x64:
     name: Build on Windows x64
@@ -75,6 +76,7 @@ jobs:
           path: |
             wcslib-8.10/C/libwcs.dll.8.10
           retention-days: 1
+          compression-level: 9
 
   build-on-linux-arm64:
     name: Build on Linux ARM64
@@ -105,3 +107,4 @@ jobs:
           path: |
             wcslib-8.10/C/libwcs.so.8.10
           retention-days: 1
+          compression-level: 9

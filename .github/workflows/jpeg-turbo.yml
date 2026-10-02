@@ -37,6 +37,7 @@ jobs:
           path: |
             libjpeg-turbo/build/libturbojpeg.so
           retention-days: 1
+          compression-level: 9
 
   build-on-windows-x64:
     name: Build on Windows x64
@@ -85,6 +86,7 @@ jobs:
           path: |
             libjpeg-turbo/build/libturbojpeg.dll
           retention-days: 1
+          compression-level: 9
 
   build-on-linux-arm64:
     name: Build on Linux ARM64
@@ -119,3 +121,4 @@ jobs:
           path: |
             libjpeg-turbo/build/libturbojpeg.so
           retention-days: 1
+          compression-level: 9
